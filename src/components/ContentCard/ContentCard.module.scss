@@ -1,0 +1,121 @@
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.priceBadge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.priceBadgePaid {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.priceBadgeFree {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.priceBadgeViewOnly {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.cardContent {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  line-height: 1.4;
+  overflow: hidden;
+  min-height: 2.8em;
+}
+
+.creator {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .imageContainer {
+    height: 180px;
+  }
+  
+  .cardContent {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 0.95rem;
+    min-height: 2.6em;
+  }
+  
+  .priceBadge {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .imageContainer {
+    height: 160px;
+  }
+  
+  .cardContent {
+    padding: 0.875rem;
+  }
+  
+  .title {
+    font-size: 1rem;
+    min-height: 2.4em;
+  }
+}
