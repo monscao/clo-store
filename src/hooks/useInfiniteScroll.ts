@@ -1,36 +1,29 @@
 import { useEffect, useRef, useCallback } from 'react';
 
-export const useInfiniteScroll = (onLoadMore: () => void, enabled: boolean = true) => {
+export const useInfiniteScroll = (onLoadMore: () => void, isLoading: boolean, hasMore: boolean) => {
   const observerRef = useRef<HTMLDivElement>(null);
-  const isFetching = useRef(false);
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const [target] = entries;
-    if (enabled && target.isIntersecting && !isFetching.current) {
-      isFetching.current = true;
+    if (target.isIntersecting && !isLoading && hasMore) {
       onLoadMore();
-      // Set a cooldown period to prevent frequent triggering
-      setTimeout(() => {
-        isFetching.current = false;
-      }, 1000);
     }
-  }, [onLoadMore, enabled]);
+  }, [onLoadMore, isLoading, hasMore]);
 
   useEffect(() => {
     const element = observerRef.current;
-    const observer = new IntersectionObserver(handleObserver, {
-      threshold: 0.1,
-    });
+    if (!element) return;
 
-    if (element) {
-      observer.observe(element);
-    }
+    const observer = new IntersectionObserver(handleObserver, {
+      threshold: 0,
+      rootMargin: '100px'
+    });
+    observer.observe(element);
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      observer.disconnect();
     };
   }, [handleObserver]);
+
 
   return { observerRef };
 };
