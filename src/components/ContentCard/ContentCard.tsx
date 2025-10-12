@@ -46,14 +46,18 @@ const ContentCard: React.FC<ContentCardProps> = ({ item }) => {
             e.currentTarget.src = PLACEHOLDER_IMAGE;
           }}
         />
-        <div className={`${styles.priceBadge} ${getPriceBadgeClass()}`}>
-          {getPriceDisplay()}
-        </div>
       </div>
       
       <div className={styles.cardContent}>
-        <h3 className={styles.title}>{item.title}</h3>
-        <p className={styles.creator}>By {item.creator}</p>
+        <div className={styles.cardLeft}>
+          <h3 className={styles.title}>{item.title}</h3>
+          <p className={styles.creator}>By {item.creator}</p>
+        </div>
+        <div className={styles.cardRight}>
+          <div className={`${styles.priceBadge} ${getPriceBadgeClass()}`}>
+            {getPriceDisplay()}
+          </div>
+        </div>
       </div>
     </div>
   );

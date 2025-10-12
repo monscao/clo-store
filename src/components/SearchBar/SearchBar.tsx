@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSearchKeyword } from '../../store/filterSlice';
+import { useFilterParams } from '../../hooks/useFilterParams';
 import { useDebounce } from '../../hooks/useDebounce';
 import styles from './SearchBar.module.scss';
 
 const SearchBar: React.FC = () => {
-  const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState('');
+  const { searchKeyword, setSearchKeyword } = useFilterParams();
+  const [searchTerm, setSearchTerm] = useState(searchKeyword);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   useEffect(() => {
-    dispatch(setSearchKeyword(debouncedSearchTerm));
-  }, [debouncedSearchTerm, dispatch]);
+    setSearchKeyword(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    setSearchTerm(searchKeyword);
+  }, [searchKeyword]);
 
   return (
     <div className={styles.searchBar}>

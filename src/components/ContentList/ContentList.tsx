@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store';
 import { RootState } from '../../store';
 import { fetchContentItems } from '../../store/contentSlice';
+import { useFilterParams } from '../../hooks/useFilterParams';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import ContentCard from '../ContentCard/ContentCard';
 import styles from './ContentList.module.scss';
@@ -9,10 +10,9 @@ import styles from './ContentList.module.scss';
 const ContentList: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, loading, hasMore, page } = useAppSelector((state: RootState) => state.content);
-  const { pricingOptions, searchKeyword, sortBy } = useAppSelector((state: RootState) => state.filters);
+  const { pricingOptions, searchKeyword, sortBy } = useFilterParams();
   // Use ref to track whether the initial request has been made
   const hasInitialized = useRef(false);
-  const [isFiltering, setIsFiltering] = useState(false);
 
   const filteredAndSortedItems = useMemo(() => {
     let filtered = items;
@@ -48,24 +48,13 @@ const ContentList: React.FC = () => {
     return filtered;
   }, [items, pricingOptions, searchKeyword, sortBy]);
 
-  // Detecting changes in filter conditions
-  useEffect(() => {
-    // Temporarily disable infinite scrolling while filter conditions change
-    setIsFiltering(true);
-    const timer = setTimeout(() => {
-      setIsFiltering(false);
-    }, 1000); // Reactivate after 1 second
-    return () => clearTimeout(timer);
-  }, [pricingOptions, searchKeyword, sortBy]);
-
-
   const loadMore = () => {
-    if (!loading && hasMore && !isFiltering) {
+    if (!loading && hasMore && filteredAndSortedItems.length > 0) {
       dispatch(fetchContentItems(page + 1));
     }
   };
 
-  const { observerRef } = useInfiniteScroll(loadMore, !isFiltering);
+  const { observerRef } = useInfiniteScroll(loadMore, loading, hasMore);
 
   useEffect(() => {
     if (!hasInitialized.current && items.length === 0) {
@@ -82,8 +71,12 @@ const ContentList: React.FC = () => {
         ))}
       </div>
       
-      {(loading || hasMore) && (
-        <div ref={observerRef} className={styles.loader}>
+      {hasMore && (
+        <div ref={observerRef} className={styles.trigger} />
+      )}
+
+      {loading && (
+        <div className={styles.loader}>
           {loading && <div className={styles.loadingSpinner}>Loading...</div>}
         </div>
       )}

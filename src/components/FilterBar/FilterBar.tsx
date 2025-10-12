@@ -1,24 +1,17 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { setPricingOptions, resetFilters } from '../../store/filterSlice';
+import { useFilterParams } from '../../hooks/useFilterParams';
 import { PricingOption, PricingOptionLabels } from '../../types';
 import styles from './FilterBar.module.scss';
 
 const FilterSection: React.FC = () => {
-  const dispatch = useDispatch();
-  const { pricingOptions } = useSelector((state: RootState) => state.filters);
+  const { pricingOptions, setPricingOptions, resetFilters } = useFilterParams();
 
   const handlePricingOptionChange = (option: PricingOption) => {
     const newOptions = pricingOptions.includes(option)
       ? pricingOptions.filter((item: any) => item !== option)
       : [...pricingOptions, option];
     
-    dispatch(setPricingOptions(newOptions));
-  };
-
-  const handleReset = () => {
-    dispatch(resetFilters());
+    setPricingOptions(newOptions);
   };
 
   return (
@@ -43,7 +36,7 @@ const FilterSection: React.FC = () => {
       </div>
       <button 
         className={styles.resetButton}
-        onClick={handleReset}>
+        onClick={resetFilters}>
         Reset
       </button>
     </div>
