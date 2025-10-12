@@ -8,7 +8,7 @@
 
 html {
   font-size: 0.75rem;
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
 }
 
 body {
@@ -66,4 +66,21 @@ button {
   background: none;
   border: none;
   padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
 }
