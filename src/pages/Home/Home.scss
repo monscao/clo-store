@@ -1,0 +1,78 @@
+.home {
+  min-height: 100vh;
+  font-family: -homele-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.home-header {
+  text-align: center;
+  color: #96969F;
+  background-color: #000000;
+  width: 100vw;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  box-shadow: 0 -1px 0 0 #1A1A1F inset;
+  display: -ms-flexbox;
+  display: flex;
+  height: 48px;
+  z-index: 10001;
+  padding: 0 16px;
+}
+
+.home-icon {
+  width: 80px;
+  height: 16px;
+  background: url('https://storagefiles.clo-set.com/public/connect/common/connect-desktop-header-bi.svg') no-repeat;
+  
+}
+
+.home-content {
+  display: flex;
+  margin-top: 48px;
+  height: auto;
+  flex-direction: column;
+  min-height: calc(100vh - 48px);
+  padding: 4rem 8rem;
+  gap: 2rem;
+  background-color: #000000;
+}
+
+.content-main {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .sidebar {
+    flex: none;
+    width: 100%;
+  }
+  
+  .home-header {
+    padding: 1rem;
+  }
+  
+  .home-header h1 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .home-icon {
+    width: 32px;
+    height: 26px;
+    background: url(https://storagefiles.clo-set.com/public/connect/common/connect-bi-primary-high.png) no-repeat;
+    background-size: 100%;
+  }
+}

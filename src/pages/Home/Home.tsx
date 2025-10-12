@@ -1,33 +1,30 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../../store';
-import Layout from '../../components/Layout/Layout';
-import FilterSection from '../../components/FilterSection/FilterSection';
+import FilterSection from '../../components/FilterBar/FilterBar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ContentList from '../../components/ContentList/ContentList';
-import './Home.css';
+import './Home.scss'
 
 const Home: React.FC = () => {
   return (
     <Provider store={store}>
-      <Layout>
-        <div className="home">
-          <header className="home-header">
-            <h1>CLO-SET CONNECT Store</h1>
-          </header>
-          
-          <div className="home-content">
-            <aside className="sidebar">
-              <FilterSection />
-            </aside>
-            
-            <main className="main-content">
-              <SearchBar />
-              <ContentList />
-            </main>
+      <div className="home">
+        <header className="home-header">
+          <a href="https://connect.clo-set.com/zh">
+            <div className='home-icon'></div>
+          </a>
+        </header>
+        <div className="home-content">
+          <div>
+            <SearchBar />
+            <FilterSection />
           </div>
+          <main className="content-main">
+            <ContentList />
+          </main>
         </div>
-      </Layout>
+      </div>
     </Provider>
   );
 };
