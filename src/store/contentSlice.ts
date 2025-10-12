@@ -34,7 +34,6 @@ const contentSlice = createSlice({
       .addCase(fetchContentItems.fulfilled, (state, action: PayloadAction<ContentItem[]>) => {
         state.loading = false;
         state.items = [...state.items, ...action.payload];
-        console.log(state.items)
         state.page += 1;
         // here should be a check to see if more items are available
         // state.hasMore = action.payload.hasMore;
