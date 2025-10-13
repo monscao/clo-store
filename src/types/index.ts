@@ -16,7 +16,7 @@ export interface ContentItem {
   creator: string;
   title: string;
   pricingOption: PricingOption;
-  price?: number;
+  price: number;
 }
 
 export interface FilterState {

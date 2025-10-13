@@ -5,12 +5,13 @@ import { fetchContentItems } from '../../store/contentSlice';
 import { useFilterParams } from '../../hooks/useFilterParams';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import ContentCard from '../ContentCard/ContentCard';
+import { PricingOption } from '../../types';
 import styles from './ContentList.module.scss';
 
 const ContentList: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, loading, hasMore, page } = useAppSelector((state: RootState) => state.content);
-  const { pricingOptions, searchKeyword, sortBy } = useFilterParams();
+  const { pricingOptions, searchKeyword, sortBy, priceRange } = useFilterParams();
   // Use ref to track whether the initial request has been made
   const hasInitialized = useRef(false);
 
@@ -28,6 +29,12 @@ const ContentList: React.FC = () => {
       filtered = filtered.filter(item => 
         item.creator.toLowerCase().includes(keyword) || 
         item.title.toLowerCase().includes(keyword)
+      );
+    }
+
+    if (pricingOptions.includes(PricingOption.PAID)) {
+      filtered = filtered.filter(item => 
+        item.price >= priceRange[0] && item.price <= priceRange[1]
       );
     }
 

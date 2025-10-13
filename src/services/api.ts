@@ -17,7 +17,9 @@ export const fetchContents = async (page: number, limit: number = 20): Promise<C
         path: item.imagePath || PLACEHOLDER_IMAGE,
         creator: item.creator || 'Unknown Creator',
         title: page + item.title || 'Untitled',
-        pricingOption: item.pricingOption || PricingOption.FREE,
+        // pricingOption: item.pricingOption || PricingOption.FREE,
+        // mock paid data
+        pricingOption: item.creator === 'Quinn' ? 0 : (item.pricingOption || PricingOption.FREE),
         price: item.price || 0
       };
     });

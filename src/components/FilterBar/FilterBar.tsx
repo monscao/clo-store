@@ -1,10 +1,17 @@
 import React from 'react';
 import { useFilterParams } from '../../hooks/useFilterParams';
 import { PricingOption, PricingOptionLabels } from '../../types';
+import PriceSlider from '../PriceSlider/PriceSlider';
 import styles from './FilterBar.module.scss';
 
 const FilterSection: React.FC = () => {
-  const { pricingOptions, setPricingOptions, resetFilters } = useFilterParams();
+  const { 
+    pricingOptions, 
+    setPricingOptions, 
+    resetFilters,
+    priceRange,
+    setPriceRange
+  } = useFilterParams();
 
   const handlePricingOptionChange = (option: PricingOption) => {
     const newOptions = pricingOptions.includes(option)
@@ -34,6 +41,17 @@ const FilterSection: React.FC = () => {
           ))
         }
       </div>
+      {pricingOptions.includes(PricingOption.PAID) && (
+        <div className={styles.filterGroup}>
+          <h3 className={styles.filterTitle}>Price Range</h3>
+          <PriceSlider 
+            value={priceRange} 
+            onChange={setPriceRange}
+            min={0}
+            max={999}
+          />
+        </div>
+      )}
       <button 
         className={styles.resetButton}
         onClick={resetFilters}>
