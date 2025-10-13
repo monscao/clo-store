@@ -19,53 +19,25 @@
       margin-right: 1rem;
     }
 
-    .checkboxLabel {
+    .checkboxGroup {
       display: flex;
-      margin-left: 1rem;
-      align-items: center;
+      flex-direction: row;
       gap: 0.5rem;
-      cursor: pointer;
+    }
+
+    .checkbox {
       font-size: 1rem;
       color: #555;
-
-      .checkbox {
-        appearance: none;
-        width: 16px;
-        height: 16px;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        background-color: #2a2b2c;
-        cursor: pointer;
-        position: relative;
-        transition: all 0.2s ease;
-      }
-
-      .checkbox:checked {
+      
+      :global(.ant-checkbox-checked .ant-checkbox-inner) {
         background-color: #4facfe;
         border-color: #4facfe;
       }
-
-      .checkbox:checked::before {
-        content: "✓";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: 12px;
-        font-weight: bold;
-      }
-
-      .checkbox:hover {
-        border-color: #4facfe;
-      }
-
-      .checkbox:disabled {
-        background-color: #f5f5f5;
-        border-color: #ddd;
-        cursor: not-allowed;
-      }
     }
+  }
+
+  .priceRange {
+    margin-left: 4rem;
   }
 }
 

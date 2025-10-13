@@ -1,4 +1,5 @@
 import React from 'react';
+import { Checkbox } from 'antd';
 import { useFilterParams } from '../../hooks/useFilterParams';
 import { PricingOption, PricingOptionLabels } from '../../types';
 import PriceSlider from '../PriceSlider/PriceSlider';
@@ -13,10 +14,10 @@ const FilterSection: React.FC = () => {
     setPriceRange
   } = useFilterParams();
 
-  const handlePricingOptionChange = (option: PricingOption) => {
-    const newOptions = pricingOptions.includes(option)
-      ? pricingOptions.filter((item: any) => item !== option)
-      : [...pricingOptions, option];
+  const handlePricingOptionChange = (option: PricingOption, checked: boolean) => {
+    const newOptions = checked
+      ? [...pricingOptions, option]
+      : pricingOptions.filter(item => item !== option);
     
     setPricingOptions(newOptions);
   };
@@ -25,33 +26,29 @@ const FilterSection: React.FC = () => {
     <div className={styles.filterSection}>  
       <div className={styles.filterGroup}>
         <span className={styles.filterTitle}>Pricing Option</span>
-        {
-          (Object.values(PricingOption)
-            .filter(value => typeof value === 'number') as PricingOption[])
-            .map(option => (
-              <label key={option} className={styles.checkboxLabel}>
-                <input
-                  type="checkbox"
-                  checked={pricingOptions.includes(option)}
-                  onChange={() => handlePricingOptionChange(option)}
-                  className={styles.checkbox}
-                />
-                {PricingOptionLabels[option]}
-              </label>
-          ))
-        }
-      </div>
-      {pricingOptions.includes(PricingOption.PAID) && (
-        <div className={styles.filterGroup}>
-          <h3 className={styles.filterTitle}>Price Range</h3>
-          <PriceSlider 
-            value={priceRange} 
-            onChange={setPriceRange}
-            min={0}
-            max={999}
-          />
+        <div className={styles.checkboxGroup}>
+          {Object.values(PricingOption).filter(value => typeof value === 'number').map(option => (
+            <Checkbox
+              key={option}
+              checked={pricingOptions.includes(option as PricingOption)}
+              onChange={(e) => handlePricingOptionChange(option as PricingOption, e.target.checked)}
+              className={styles.checkbox}>
+              {PricingOptionLabels[option as PricingOption]}
+            </Checkbox>
+          ))}
         </div>
-      )}
+        {pricingOptions.includes(PricingOption.PAID) && (
+          <div className={[styles.filterGroup, styles.priceRange].join(' ')}>
+            <h3 className={styles.filterTitle}>Price Range</h3>
+            <PriceSlider 
+              value={priceRange} 
+              onChange={setPriceRange}
+              min={0}
+              max={999}
+            />
+          </div>
+        )}
+      </div>
       <button 
         className={styles.resetButton}
         onClick={resetFilters}>
