@@ -4,6 +4,7 @@ import { store } from '../../store';
 import FilterSection from '../../components/FilterBar/FilterBar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ContentList from '../../components/ContentList/ContentList';
+import SortingDropdown from '../../components/SortingDropdown/SortingDropdown';
 import './Home.scss'
 
 const Home: React.FC = () => {
@@ -19,6 +20,7 @@ const Home: React.FC = () => {
           <div>
             <SearchBar />
             <FilterSection />
+            <SortingDropdown />
           </div>
           <main className="content-main">
             <ContentList />

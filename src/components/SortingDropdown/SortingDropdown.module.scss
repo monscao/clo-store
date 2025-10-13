@@ -1,0 +1,14 @@
+.dropdown {
+  :global {
+    .ant-select-selector {
+      border-radius: 4px;
+      background-color: #333 !important;
+    }
+    
+    .ant-select-focused .ant-select-selector {
+      background-color: #333 !important;
+      border-color: #007bff !important;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important;
+    }
+  }
+}
