@@ -1,0 +1,132 @@
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  &:hover .image {
+    transform: scale(1.05);
+  }
+
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 125%;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+
+.cardContent {
+  padding: 0.75rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #fff;
+
+  .cardLeft {
+    flex: 1;
+  }
+
+  .cardRight {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    line-height: 1.4;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+
+  .creator {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #718096;
+    font-weight: 500;
+  }
+}
+
+.priceBadge {
+  padding: 0.4rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
+.priceBadgePaid {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.priceBadgeFree {
+  background: linear-gradient(135deg, #43e97b 0%, #00f2fe 100%);
+}
+
+.priceBadgeViewOnly {
+  background: linear-gradient(135deg, #4facfe 0%, #38f9d7 100%);
+}
+
+@media (max-width: 768px) {
+  .imageContainer {
+    height: 180px;
+  }
+  
+  .cardContent {
+    padding: 1rem;
+
+    .title {
+      font-size: 0.95rem;
+      min-height: 2.6em;
+    }
+    
+    .priceBadge {
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.7rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .imageContainer {
+    height: 160px;
+  }
+  
+  .cardContent {
+    padding: 0.875rem;
+  }
+  
+  .title {
+    font-size: 1rem;
+    min-height: 2.4em;
+  }
+}

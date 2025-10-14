@@ -1,0 +1,15 @@
+.sliderContainer {
+  width: 24rem;
+  position: relative;
+
+  .sliderValues {
+    width: calc(100% + 8px);
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: #666;
+    top: 1.5rem;
+    left: -8px;
+  }
+}

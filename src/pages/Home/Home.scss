@@ -1,0 +1,156 @@
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-family: -homele-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.home-header {
+  text-align: center;
+  color: #96969F;
+  background-color: #000000;
+  width: 100vw;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  box-shadow: 0 -1px 0 0 #1A1A1F inset;
+  display: -ms-flexbox;
+  display: flex;
+  height: 64px;
+  z-index: 10001;
+  padding: 0 16px;
+
+  .header-left,
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-right {
+    margin-right: 1rem;
+
+    .auth-button {
+      color: #fff;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      border-radius: 1.5rem;
+
+      &.login-button:hover {
+        background: #333;
+      }
+
+      &.register-button {
+        margin-left: 1rem;
+        border: 1px solid #ddd;
+        
+        &:hover {
+          color: #66F0FF;
+          border-color: #66F0FF;
+        }
+      }
+    }
+  }
+
+  .header-nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 2rem;
+
+    .nav-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: transparent;
+      color: #666;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: #66F0FF;
+      }
+
+      &.active {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.home-icon {
+  width: 80px;
+  height: 16px;
+  background: url('https://storagefiles.clo-set.com/public/connect/common/connect-desktop-header-bi.svg') no-repeat;
+  
+}
+
+.home-content {
+  flex: 1;
+  display: flex;
+  margin-top: 48px;
+  height: auto;
+  flex-direction: column;
+  min-height: calc(100vh - 48px);
+  background-color: #000000;
+
+  .content-filter {
+    padding: 4rem 8rem 0rem 8rem;
+  }
+
+  .content-main {
+    flex: 1;
+    min-width: 0;
+    padding: 2rem 4rem 4rem 4rem;
+    background: #1A1A1F;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .sidebar {
+    flex: none;
+    width: 100%;
+  }
+  
+  .home-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+
+    h1 {
+      font-size: 1.25rem;
+    }
+
+    .header-nav {
+      gap: 0.5rem;
+      
+      .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .home-icon {
+    width: 32px;
+    height: 26px;
+    background: url(https://storagefiles.clo-set.com/public/connect/common/connect-bi-primary-high.png) no-repeat;
+    background-size: 100%;
+  }
+}
