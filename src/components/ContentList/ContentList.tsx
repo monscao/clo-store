@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef } from 'react';
-import { Skeleton } from 'antd';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Skeleton, Empty } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { RootState } from '../../store';
 import { fetchContentItems } from '../../store/contentSlice';
@@ -15,10 +15,29 @@ const ContentList: React.FC = () => {
   const { pricingOptions, searchKeyword, sortBy, priceRange } = useFilterParams();
   // Use ref to track whether the initial request has been made
   const hasInitialized = useRef(false);
+  // State to control skeleton display with delay
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
-  // COnfiguration of Skeleton
+  // Configuration of Skeleton
   const skeletonCount = 8;
   const skeletonArray = Array.from({ length: skeletonCount }, (_, i) => i);
+
+  // Control skeleton display time
+  useEffect(() => {
+    let timer: number;
+    if (loading) {
+      setShowSkeleton(true);
+    } else {
+      // Keep skeleton visible for 1 second after loading completes
+      timer = window.setTimeout(() => {
+        setShowSkeleton(false);
+      }, 1000);
+    }
+    
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [loading]);
 
   const filteredAndSortedItems = useMemo(() => {
     let filtered = items;
@@ -66,7 +85,7 @@ const ContentList: React.FC = () => {
     }
   };
 
-  const { observerRef } = useInfiniteScroll(loadMore, loading, hasMore);
+  const { observerRef } = useInfiniteScroll(loadMore, loading && !showSkeleton, hasMore);
 
   useEffect(() => {
     if (!hasInitialized.current && items.length === 0) {
@@ -77,12 +96,23 @@ const ContentList: React.FC = () => {
   
   return (
     <div className={styles.contentList}>
+      {/* Show empty state when no results found */}
+      {!loading && !showSkeleton && filteredAndSortedItems.length === 0 && items.length > 0 && (
+        <div className={styles.emptyContainer}>
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            className={styles.customEmpty}
+            description="Oops, no items found matching your criteria."
+          />
+        </div>
+      )}
+
       <div className={styles.grid}>
-        {/* Show skeleton screen on initial load */}
-        {loading && items.length === 0 ? (
+        {/* Show skeleton screen on initial load with delay control */}
+        {(showSkeleton && items.length === 0) ? (
           skeletonArray.map(index => (
             <div key={`skeleton-${index}`} className={styles.skeletonCard}>
-              <Skeleton.Node active style={{ width: '100%', height: 200 }} />
+              <Skeleton.Node active className={styles.skeletonCard} />
               <Skeleton active paragraph={{ rows: 2 }} title={false} />
             </div>
           ))
@@ -94,26 +124,21 @@ const ContentList: React.FC = () => {
         )}
       </div>
       
-      {/* Skeleton screen when loading more */}
-      {loading && items.length > 0 && (
-        <div className={styles.grid}>
+      {/* Skeleton screen when loading more with delay control */}
+      {(showSkeleton && items.length > 0) && (
+        <div className={styles.grid} style={{ marginTop: '2rem' }}>
           {skeletonArray.map(index => (
             <div key={`skeleton-more-${index}`} className={styles.skeletonCard}>
-              <Skeleton.Node active style={{ width: '100%', height: 200 }} />
+              <Skeleton.Node active className={styles.skeletonCard} />
               <Skeleton active paragraph={{ rows: 2 }} title={false} />
             </div>
           ))}
         </div>
       )}
       
-      {hasMore && (
+      {/* Ensure trigger is always visible and not blocked by skeleton */}
+      {hasMore && !showSkeleton && (
         <div ref={observerRef} className={styles.trigger} />
-      )}
-
-      {loading && (
-        <div className={styles.loader}>
-          {loading && <div className={styles.loadingSpinner}>Loading...</div>}
-        </div>
       )}
     </div>
   );

@@ -1,17 +1,45 @@
 .contentList {
   width: 100%;
-}
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem 3rem;
+  .emptyContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: 2rem;
+    color: #fff;
+    font-weight: 700;
 
-  .skeletonCard {
-    background: #333;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    .customEmpty {
+      :global {
+        .ant-empty-description {
+          color: #fff !important;
+        }
+      }
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 3rem;
+
+    .skeletonCard {
+      background: #333;
+      border-radius: 12px;
+      padding: 1rem;
+      height: 100%;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+      .skeletonCard {
+       position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 125%;
+      overflow: hidden;
+      flex-shrink: 0;
+      }
+    }
   }
 }
 
