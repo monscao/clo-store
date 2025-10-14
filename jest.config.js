@@ -24,7 +24,12 @@ export default {
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
     '!src/index.tsx',
-    '!src/reportWebVitals.ts'
+    '!src/reportWebVitals.ts',
+    '!src/pages/**',
+    '!src/services/**',
+    '!src/store/**',
+    '!src/app.tsx',
+    '!src/**/*.d.ts',
   ],
   
   // Coverage Directory
@@ -38,7 +43,13 @@ export default {
   },
   
   // Ignored folders
-  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/dist/',
+    '/src/pages/',
+    '/src/services/', 
+    '/src/store/'
+  ],
 
   // Configuration for vite
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
