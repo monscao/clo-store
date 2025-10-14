@@ -1,6 +1,6 @@
 import React from 'react';
 import { Select } from 'antd';
-import { useFilterParams } from '../../hooks/useFilterParams';
+import { useFilterParams } from '../../hooks/useFilterParams/useFilterParams';
 import styles from './SortingDropdown.module.scss';
 
 const SortingDropdown: React.FC = () => {

@@ -4,10 +4,14 @@ import styles from './ContentCard.module.scss';
 
 interface ContentCardProps {
   item: ContentItem;
+  placeholderImage?: string;
 }
-const PLACEHOLDER_IMAGE = '/src/assets/svgs/placeholder-image.svg';
+export const PLACEHOLDER_IMAGE = '/src/assets/svgs/placeholder-image.svg';
 
-const ContentCard: React.FC<ContentCardProps> = ({ item }) => {
+const ContentCard: React.FC<ContentCardProps> = ({
+  item,
+  placeholderImage = PLACEHOLDER_IMAGE
+}) => {
   const getPriceDisplay = () => {
     switch (item.pricingOption) {
       case PricingOption.PAID:
@@ -34,16 +38,21 @@ const ContentCard: React.FC<ContentCardProps> = ({ item }) => {
     }
   };
 
+  // Process the image path
+  const getImageSrc = () => {
+    return item.path && item.path.trim() !== '' ? item.path : placeholderImage;
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
         <img 
-          src={item.path} 
+          src={getImageSrc()}  // Use the processed image path
           alt={item.title} 
           className={styles.image}
           onError={(e) => {
             // Use default image when image loading fails
-            e.currentTarget.src = PLACEHOLDER_IMAGE;
+            e.currentTarget.src = placeholderImage;
           }}
         />
       </div>

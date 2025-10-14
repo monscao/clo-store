@@ -1,11 +1,11 @@
 import React from 'react';
 import { Checkbox } from 'antd';
-import { useFilterParams } from '../../hooks/useFilterParams';
+import { useFilterParams } from '../../hooks/useFilterParams/useFilterParams';
 import { PricingOption, PricingOptionLabels } from '../../types';
 import PriceSlider from '../PriceSlider/PriceSlider';
 import styles from './FilterBar.module.scss';
 
-const FilterSection: React.FC = () => {
+const Filterbar: React.FC = () => {
   const { 
     pricingOptions, 
     setPricingOptions, 
@@ -23,7 +23,7 @@ const FilterSection: React.FC = () => {
   };
 
   return (
-    <div className={styles.filterSection}>  
+    <div className={styles.filterBar}>  
       <div className={styles.filterGroup}>
         <span className={styles.filterTitle}>Pricing Option</span>
         <div className={styles.checkboxGroup}>
@@ -58,4 +58,4 @@ const FilterSection: React.FC = () => {
   );
 };
 
-export default FilterSection;
+export default Filterbar;

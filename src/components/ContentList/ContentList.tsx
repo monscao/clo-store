@@ -3,8 +3,8 @@ import { Skeleton, Empty } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { RootState } from '../../store';
 import { fetchContentItems } from '../../store/contentSlice';
-import { useFilterParams } from '../../hooks/useFilterParams';
-import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
+import { useFilterParams } from '../../hooks/useFilterParams/useFilterParams';
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll/useInfiniteScroll';
 import ContentCard from '../ContentCard/ContentCard';
 import { PricingOption } from '../../types';
 import styles from './ContentList.module.scss';
@@ -38,8 +38,10 @@ const ContentList: React.FC = () => {
     }
 
     if (pricingOptions.includes(PricingOption.PAID)) {
-      filtered = filtered.filter(item => 
-        item.price >= priceRange[0] && item.price <= priceRange[1]
+      filtered = filtered.filter(item =>
+        typeof item.price === 'number' &&
+        item.price >= priceRange[0] &&
+        item.price <= priceRange[1]
       );
     }
 

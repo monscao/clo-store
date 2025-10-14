@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../../store';
-import FilterSection from '../../components/FilterBar/FilterBar';
+import FilterBar from '../../components/FilterBar/FilterBar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ContentList from '../../components/ContentList/ContentList';
 import SortingDropdown from '../../components/SortingDropdown/SortingDropdown';
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
         <div className="home-content">
           <div className="content-filter">
             <SearchBar />
-            <FilterSection />
+            <FilterBar />
           </div>
           <main className="content-main">
             <SortingDropdown />

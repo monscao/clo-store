@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useFilterParams } from '../../hooks/useFilterParams';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useFilterParams } from '../../hooks/useFilterParams/useFilterParams';
+import { useDebounce } from '../../hooks/useDebounce/useDebounce';
 import styles from './SearchBar.module.scss';
 
 const SearchBar: React.FC = () => {
