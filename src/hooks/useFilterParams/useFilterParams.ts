@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { PricingOption } from '../types';
+import { PricingOption } from '../../types';
 
 export const useFilterParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
