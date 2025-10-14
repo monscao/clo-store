@@ -1,5 +1,7 @@
 .home {
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  display: flex;
   font-family: -homele-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -19,7 +21,7 @@
   box-shadow: 0 -1px 0 0 #1A1A1F inset;
   display: -ms-flexbox;
   display: flex;
-  height: 48px;
+  height: 64px;
   z-index: 10001;
   padding: 0 16px;
 }
@@ -32,18 +34,24 @@
 }
 
 .home-content {
+  flex: 1;
   display: flex;
   margin-top: 48px;
   height: auto;
   flex-direction: column;
   min-height: calc(100vh - 48px);
-  padding: 4rem 8rem;
   background-color: #000000;
-}
 
-.content-main {
-  flex: 1;
-  min-width: 0;
+  .content-filter {
+    padding: 4rem 8rem 0rem 8rem;
+  }
+
+  .content-main {
+    flex: 1;
+    min-width: 0;
+    padding: 2rem 4rem 4rem 4rem;
+    background: #1A1A1F;
+  }
 }
 
 @media (max-width: 768px) {

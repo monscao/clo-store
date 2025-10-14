@@ -13,13 +13,14 @@ const SortingDropdown: React.FC = () => {
   ];
 
   return (
-    <Select
-      value={sortBy}
-      onChange={setSortBy}
-      options={options}
-      className={styles.dropdown}
-      style={{ width: 150 }}
-    />
+    <div className={styles.selectContainer}>
+      <Select
+        value={sortBy}
+        onChange={setSortBy}
+        options={options}
+        className={styles.dropdown}
+        style={{ width: 120 }} />
+    </div>
   );
 };
 

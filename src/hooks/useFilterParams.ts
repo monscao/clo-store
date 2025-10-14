@@ -76,7 +76,13 @@ export const useFilterParams = () => {
   }, [setSearchParams]);
 
   const resetFilters = useCallback(() => {
-    setSearchParams(new URLSearchParams());
+    setSearchParams(prev => {
+      const newParams = new URLSearchParams(prev);
+      newParams.delete('pricing');
+      newParams.delete('search');
+      newParams.delete('priceRange');
+      return newParams;
+    });
   }, [setSearchParams]);
 
   return {

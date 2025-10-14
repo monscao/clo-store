@@ -17,12 +17,12 @@ const Home: React.FC = () => {
           </a>
         </header>
         <div className="home-content">
-          <div>
+          <div className="content-filter">
             <SearchBar />
             <FilterSection />
-            <SortingDropdown />
           </div>
           <main className="content-main">
+            <SortingDropdown />
             <ContentList />
           </main>
         </div>
