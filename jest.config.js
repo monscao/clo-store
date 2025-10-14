@@ -33,7 +33,7 @@ export default {
   // Conversion Configuration
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', {
-      useESM: true,
+      tsconfig: 'tsconfig.app.json'
     }],
   },
   
@@ -42,4 +42,9 @@ export default {
 
   // Configuration for vite
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
+
+  globals: {
+    TextEncoder: TextEncoder,
+    TextDecoder: TextDecoder,
+  }
 }
