@@ -15,29 +15,10 @@ const ContentList: React.FC = () => {
   const { pricingOptions, searchKeyword, sortBy, priceRange } = useFilterParams();
   // Use ref to track whether the initial request has been made
   const hasInitialized = useRef(false);
-  // State to control skeleton display with delay
-  // const [showSkeleton, setShowSkeleton] = useState(true);
 
   // Configuration of Skeleton
   const skeletonCount = 8;
   const skeletonArray = Array.from({ length: skeletonCount }, (_, i) => i);
-
-  // Control skeleton display time
-  // useEffect(() => {
-  //   let timer: number;
-  //   if (loading) {
-  //     setShowSkeleton(true);
-  //   } else {
-  //     // Keep skeleton visible for 1 second after loading completes
-  //     timer = window.setTimeout(() => {
-  //       setShowSkeleton(false);
-  //     }, 1000);
-  //   }
-    
-  //   return () => {
-  //     if (timer) clearTimeout(timer);
-  //   };
-  // }, [loading]);
 
   const filteredAndSortedItems = useMemo(() => {
     let filtered = items;
