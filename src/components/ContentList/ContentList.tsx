@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
+import { Skeleton } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { RootState } from '../../store';
 import { fetchContentItems } from '../../store/contentSlice';
@@ -14,6 +15,10 @@ const ContentList: React.FC = () => {
   const { pricingOptions, searchKeyword, sortBy, priceRange } = useFilterParams();
   // Use ref to track whether the initial request has been made
   const hasInitialized = useRef(false);
+
+  // COnfiguration of Skeleton
+  const skeletonCount = 8;
+  const skeletonArray = Array.from({ length: skeletonCount }, (_, i) => i);
 
   const filteredAndSortedItems = useMemo(() => {
     let filtered = items;
@@ -73,10 +78,33 @@ const ContentList: React.FC = () => {
   return (
     <div className={styles.contentList}>
       <div className={styles.grid}>
-        {filteredAndSortedItems.map(item => (
-          <ContentCard key={item.id} item={item} />
-        ))}
+        {/* Show skeleton screen on initial load */}
+        {loading && items.length === 0 ? (
+          skeletonArray.map(index => (
+            <div key={`skeleton-${index}`} className={styles.skeletonCard}>
+              <Skeleton.Node active style={{ width: '100%', height: 200 }} />
+              <Skeleton active paragraph={{ rows: 2 }} title={false} />
+            </div>
+          ))
+        ) : (
+          // Show actual content
+          filteredAndSortedItems.map(item => (
+            <ContentCard key={item.id} item={item} />
+          ))
+        )}
       </div>
+      
+      {/* Skeleton screen when loading more */}
+      {loading && items.length > 0 && (
+        <div className={styles.grid}>
+          {skeletonArray.map(index => (
+            <div key={`skeleton-more-${index}`} className={styles.skeletonCard}>
+              <Skeleton.Node active style={{ width: '100%', height: 200 }} />
+              <Skeleton active paragraph={{ rows: 2 }} title={false} />
+            </div>
+          ))}
+        </div>
+      )}
       
       {hasMore && (
         <div ref={observerRef} className={styles.trigger} />
