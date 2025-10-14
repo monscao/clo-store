@@ -279,7 +279,6 @@ describe('ContentList', () => {
     expect(actualUseAppSelector).toHaveBeenCalled();
   });
 
-  // 添加这些测试用例来覆盖更多分支
   it('should handle search keyword filtering', () => {
     (useFilterParams as jest.Mock).mockReturnValue({
       pricingOptions: [],
@@ -410,7 +409,6 @@ describe('ContentList', () => {
       page: 1,
     });
 
-    // 这里验证 hasInitialized ref 的逻辑
     expect(actualUseAppSelector).toHaveBeenCalled();
   });
 
