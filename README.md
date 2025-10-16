@@ -1,4 +1,4 @@
-# CLO-SET CONNECT Store
+# Store
 
 A modern React-based e-commerce store frontend for fashion content, featuring advanced filtering, infinite scroll, and real-time search capabilities.
 
