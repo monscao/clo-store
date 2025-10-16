@@ -3,6 +3,8 @@ import { useFilterParams } from '../../hooks/useFilterParams/useFilterParams';
 import { useDebounce } from '../../hooks/useDebounce/useDebounce';
 import styles from './SearchBar.module.scss';
 
+const PLACEHOLDER_IMAGE = '/src/assets/svgs/search.svg';
+
 const SearchBar: React.FC = () => {
   const { searchKeyword, setSearchKeyword } = useFilterParams();
   const [searchTerm, setSearchTerm] = useState(searchKeyword);
@@ -18,6 +20,10 @@ const SearchBar: React.FC = () => {
 
   return (
     <div className={styles.searchBar}>
+      <img 
+        src={PLACEHOLDER_IMAGE}
+        alt='search'
+      />
       <input
         type="text"
         placeholder="Find the Items you are looking for"
